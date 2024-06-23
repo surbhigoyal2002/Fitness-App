@@ -14,7 +14,8 @@ function App() {
 
   return (
     <Box width = '400px' sx = {{width : {xl : '1488px'}}} m = 'auto'>
-     <Navbar/>
+     {/* contains navbar  */}
+     <Navbar/> 
      <Routes>
        <Route path = '/' element = {<Home/>}/>
        {/* this id is going to be dynamic */}
