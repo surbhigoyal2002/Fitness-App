@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {Box, Stack, Typography, Button, TextField} from '@mui/material'
-
-
 //created a file named fetchData for the purpose of fetching data from the api, storing api key and api host
 import {exerciseOptions, fetchData} from '../utils/fetchData'
 import HorizontalScrollbar from './HorizontalScrollbar'
 
-const SearchExercises = () => {
+
+
+const SearchExercises = ({setExercises, bodyPart, setBodyPart}) => {
     const [search, setSearch] = useState('');
-    const [exercises, setExercises] = useState([]);
-    const [bodyParts, setBodyParts] = useState([]);
+    const [bodyParts, setBodyParts] = useState([])
 
 //The useEffect hook has been used in this code to perform 
 //a side effect: fetching data from an external API
@@ -23,7 +22,7 @@ const SearchExercises = () => {
         //updates the state with the fetched data.
         setBodyParts(['all', ...bodyPartsData])//'all' is to include a default option that represents all possible body parts.
     }
-    fetchExercisesData();
+        fetchExercisesData();
  }, []) //When empty array is passed as the second argument to useEffect,
         // the effect runs only once after the initial render of the component.
 
@@ -46,6 +45,7 @@ const SearchExercises = () => {
                 || exercise.equipment.toLowerCase().includes(search)
                 || exercise.bodyPart.toLowerCase().includes(search)
             )
+            // console.log(searchedExercises)
 
             setSearch(''); //resets the search input to an empty string.
             setExercises(searchedExercises); //updates the state with the filtered list of exercises, which can then be used to update the UI.
@@ -99,7 +99,7 @@ const SearchExercises = () => {
       <Box sx ={{position: 'relative', width: '100%', p: '20px' }}>
             {/* Renders a horizontal scrollbar for navigating body parts. */}
             {/* data={bodyParts}: Passes the bodyParts data to the HorizontalScrollbar  */}
-            <HorizontalScrollbar data ={bodyParts}/>
+            <HorizontalScrollbar data ={bodyParts} bodyPart = {bodyPart} setBodyPart = {setBodyPart}/>
       </Box>
     </Stack>
   )
