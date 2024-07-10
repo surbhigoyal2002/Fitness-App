@@ -99,7 +99,7 @@ const SearchExercises = ({setExercises, bodyPart, setBodyPart}) => {
       <Box sx ={{position: 'relative', width: '100%', p: '20px' }}>
             {/* Renders a horizontal scrollbar for navigating body parts. */}
             {/* data={bodyParts}: Passes the bodyParts data to the HorizontalScrollbar  */}
-            <HorizontalScrollbar data ={bodyParts} bodyPart = {bodyPart} setBodyPart = {setBodyPart}/>
+            <HorizontalScrollbar data ={bodyParts} bodyPart = {bodyPart} setBodyPart = {setBodyPart} isBodyParts = {isBodyParts} />
       </Box>
     </Stack>
   )
