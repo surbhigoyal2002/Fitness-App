@@ -21,12 +21,37 @@ export const youtubeOptions = {
 
 
  //makes a network request to the specified URL with the given options.
-export const fetchData = async (url, options) => {
-     //waits for the fetch request to complete and stores the response.
-    const response = await fetch(url, options);
-    //since we are using fetch not axios so we need to extract the data
-    //extracts the JSON data from the response
-    const data = await response.json();
+// export const fetchData = async (url, options) => {
+//      //waits for the fetch request to complete and stores the response.
+//     const response = await fetch(url, options);
+//     //since we are using fetch not axios so we need to extract the data
+//     //extracts the JSON data from the response
+//     const data = await response.json();
 
-    return data;
-}
+//     return data;
+// }
+export const fetchData = async (url, options) => {
+  try {
+      // Wait for the fetch request to complete
+      const response = await fetch(url, options);
+
+      // Check if the response status is in the successful range (200-299)
+      if (!response.ok) {
+          // If the response is not okay, throw an error
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Get the raw text response
+      const text = await response.text();
+      console.log('Response Text:', text);
+
+      // Try to parse the JSON data from the response text
+      const data = JSON.parse(text);
+      return data;
+
+  } catch (error) {
+      // Handle and log any errors that occurred during the fetch or JSON parsing
+      console.error('Error fetching data:', error);
+      throw error; // Re-throw the error if needed, or handle it appropriately
+  }
+};
